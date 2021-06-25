@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+</head>
+
+<body>
+<h1>Topographic Horizons</h1>
+<p>This set of functions, based on the paper submitted to IEEE  Geoscience and Remote Sensing Letters [1],  computes the angles to the horizons from an  elevation grid, measured in degrees upward from the horizontal. The  one-dimensional problem uses an order N algorithm [2].  Horizons for arbitrary azimuths are derived by rotating the elevation grid, then  calculating the horizons along the columns of the rotated grid and re-rotating  the grid back to its original orientation. The code supports grids in either  projected or geographic format; it also calculates the distances to the  horizon.</p>
+<p>
+  The examples in the <em>demo</em> folder reproduce Figures 1  through 5 in the associated manuscript [1].  The demos require my SunPosition toolbox also [3],  but the horizon functions themselves do not. To reduce the size of the DEM  (digital elevation model), on can run the demos using <em>MainDemo</em> with the  argument true (or 1), which uses just a 0.25°×0.25° section of that paper’s  topographic 1°×1° tile. Alternatively, run <em>MainDemo</em>(false) to use  the whole grid.</p>
+<h2>A note on azimuth directions</h2>
+<p>Back in the late 1970s when I started working on topographic  radiation problems, my favorite text about climate, Sellers&rsquo; <em>Physical  Climatology</em> [4],  represented solar azimuths with zero South, positive East, negative West,  consistent with a right-hand coordinate system (e.g., longitudes positive East).  An alternative convention, zero North, positive clockwise around the circle to  360°,  has turned out to be more common. For example, MATLAB&rsquo;s <em>gradientm</em> function uses it, although MATLAB&rsquo;s <em>atan2d</em> returns results in the ±180°  range. My codes allow either convention. Considering that users will employ one  or the other rather than switch back and forth, I decided against making the  choice through an argument in many functions. Instead, users can set their  preference in the <em>azimuthPreference</em> function; a bunch of my functions  call that one to decide how to represent azimuths.</p>
+<h2>Main function: horizonAllDirections</h2>
+<p>The main function <em>horizonAllDirections</em> calculates  horizons for elevation grid in all azimuths around the circle, specified either  as  or  0 to 360° depending on settings in the <em>azimuthPreference</em> function. Available options for parallel processing comprise processing the  different rotations in parallel or processing the columns in the rotated grid  in parallel.</p>
+<h2>Other functions can be used: horizonRotatedLatLon,  horizonRotatedProj, horizonAlongProfile, viewFactor</h2>
+<p><em>horizonAllDirections</em> calls either <em>horizonRotatedLatLon</em> or <em>horizonRotatedProj</em> depending on whether the input elevation  grid is in projected or geographic format. In turn, these routines call <em>horizonAlongProfile</em>,  which computes the one-dimensional problem. These functions can be individually  called depending on the application.<br>
+  <em>horizonAllDirections</em> returns the azimuths (a  vector), horizon angles (3D), and distances to horizons (3D). <em>viewFactor</em> uses the horizon data to calculate the view factors, the fraction of the sky  open to a cell. The slope and aspect of the cell are also needed, so <em>topographicSlope</em> computes those.</p>
+<h2>Saving results: saveHorizon</h2>
+<p>Once the azimuths, horizons, and  distances are computed, the storage function <em>saveHorizon</em> offers options to save in formats HDF 5, geotiff, and MATLAB. If HDF 5 format  is chosen, both the horizons and the distances can be saved in the same file.  If geotiff is chosen, two files are output if both horizons and distances are  selected. If MATLAB (.mat) is selected, useful interpolating functions are stored  as the output (horizons or distances interpolated based on rows, columns,  azimuths). These interpolating functions support models of radiation at the  surface during a period when azimuths and solar angles vary spatially and  temporally.</p>
+<h1>References</h1>
+<p>[1]  J.  Dozier, &quot;Revisiting the topographic horizon problem in the era of big data  and parallel computing,&quot; <em>IEEE  Geosci. Remote Sens. Lett., </em>2021, in review.<br>
+  [2]  J.  Dozier, J. Bruno, and P. Downey, &quot;A faster solution to the horizon  problem,&quot; <em>Comp. Geosci., </em>vol. 7,  pp. 145-151, 1981, doi: 10.1016/0098-3004(81)90026-1.<br>
+  [3]  J.  Dozier. <em>Sun position: functions for  declination, solar longitude, radius vector, equation of time, times of sunrise  and sunset, sun angles and azimuths</em>, Version, MATLAB Central File Exchange,  2020 <a href="https://www.mathworks.com/matlabcentral/fileexchange/74939-sunposition">https://www.mathworks.com/matlabcentral/fileexchange/74939-sunposition</a>.<br>
+  [4]  W. D. Sellers, <em>Physical Climatology</em>. Chicago: University of Chicago Press, 1965,  272 pp.</p>
+<h2>&nbsp;</h2>
+</body>
+</html>

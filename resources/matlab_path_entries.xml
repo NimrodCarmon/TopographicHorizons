@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<paths>
+  <path>.</path>
+  <path>FunctionLib</path>
+  <path>FunctionLib\GenericFunctions</path>
+  <path>FunctionLib\InternalFunctions</path>
+  <path>FunctionLib\MainFunctions</path>
+  <path>FunctionLib\StorageFunctions</path>
+  <path>demo</path>
+  <path>demodata</path>
+  <path>viewFactor</path>
+</paths>

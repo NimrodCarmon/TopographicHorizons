@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<addonCore>
+  <label>TopographicHorizons</label>
+  <version>2.0</version>
+  <type>Toolbox</type>
+  <identifier>11b70dfd-221f-4a31-a410-8047c8c43713</identifier>
+  <summary>Computes the angles to the horizons from an elevation grid, measured in degrees upward from the horizontal, with options for parallelism.</summary>
+  <createdBy name="Jeff Dozier"/>
+  <image>resources/screenshot.png</image>
+</addonCore>
