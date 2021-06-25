@@ -17,15 +17,13 @@ if verLessThan('map','5.0')
     if small
         [Z,R] = geotiffread(fullfile(folder,'SmallDEM.tif')); %#ok<GTRED>
     else
-        unzip(fullfile(folder,'n32_e077_1arc_v3.zip'),folder);
-        [Z,R] = geotiffread(fullfile(folder,'n32_e077_1arc_v3.tif')); %#ok<GTRED>
+        load(fullfile(folder,'n32_e077_1arc_v3.mat'),'Z','R');
     end
 else
     if small
         [Z,R] = readgeoraster(fullfile(folder,'SmallDEM.tif'));
     else
-        unzip(fullfile(folder,'n32_e077_1arc_v3.zip'),folder);
-        [Z,R] = readgeoraster(fullfile(folder,'n32_e077_1arc_v3.tif'));
+        load(fullfile(folder,'n32_e077_1arc_v3.mat'),'Z','R');
     end
 end
 
