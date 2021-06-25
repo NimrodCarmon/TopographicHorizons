@@ -18,7 +18,10 @@ Once the azimuths, horizons, and distances are computed, the storage function sa
 
 # References
 [1]	J. Dozier, "Revisiting the topographic horizon problem in the era of big data and parallel computing," IEEE Geosci. Remote Sens. Lett., 2021, in review.
+
 [2]	J. Dozier, J. Bruno, and P. Downey, "A faster solution to the horizon problem," Comp. Geosci., vol. 7, pp. 145-151, 1981, doi: 10.1016/0098-3004(81)90026-1.
+
 [3]	J. Dozier. Sun position: functions for declination, solar longitude, radius vector, equation of time, times of sunrise and sunset, sun angles and azimuths, Version, MATLAB Central File Exchange, 2020 https://www.mathworks.com/matlabcentral/fileexchange/74939-sunposition.
+
 [4]	W. D. Sellers, Physical Climatology. Chicago: University of Chicago Press, 1965, 272 pp.
 
