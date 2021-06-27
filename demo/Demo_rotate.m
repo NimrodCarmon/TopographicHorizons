@@ -1,4 +1,4 @@
-function et = Demo_rotate(Z,printFigs,resultFolder)
+function et = Demo_rotate(Z)
 %shows missing points after rotation
 %
 tic; % start the timer
@@ -18,7 +18,7 @@ for k=size(Ir,1):-1:1
     end
 end
 % image the original and rotated, labeling the values
-figure('Name','Fig. 3')
+figure('Name','Fig. 3 Cells lost in rotation')
 subplot(2,2,1)
 imagesc(I)
 axis equal tight;
@@ -73,8 +73,5 @@ set(gca,'XTick',0:15:90)
 et = toc;
 
 fprintf('This code %s reproduces Fig. 3\n',mfilename)
-if printFigs
-    saveas(gcf,fullfile(resultFolder,[mfilename '_Fig3.png']))
-end
 
 end

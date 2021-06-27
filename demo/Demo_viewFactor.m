@@ -1,4 +1,4 @@
-function et = Demo_viewFactor(Z,R,printFigs,resultFolder,useParallel)
+function et = Demo_viewFactor(Z,R,useParallel)
 %figure showing view factor
 
 tic; % start the timer
@@ -21,7 +21,7 @@ fprintf('The white parts of the image represent values outside this range\n')
 
 % image, shaded relief, shade by slope, shade by horizon
 % shaded relief
-figure('Name','Fig. 5')
+figure('Name','Fig. 5 View Factor')
 ax = setAxes(R,true); %#ok<NASGU>
 vf(vf<ppart) = NaN;
 geoshow(vf,R,'DisplayType','Surface')
@@ -29,7 +29,4 @@ colorbar('Location','SouthOutside')
 
 et = toc;
 
-if printFigs
-    saveas(gcf,fullfile(resultFolder,[mfilename '_Fig5.png']))
-end
 end

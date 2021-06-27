@@ -1,10 +1,7 @@
-function et = Demo_shade(Z,R,printFigs,resultFolder,useParallel)
+function et = Demo_shade(Z,R,dt,useParallel)
 %figure showing shading by slope and horizon for local datetime dt
 
 tic; % start the timer
-
-% time for sun angle calculation
-dt = datetime('2020-12-21 09:00','TimeZone','Asia/Calcutta');
 
 % location of sun
 [declin,~,omega,~] = EarthEphemeris(dt);
@@ -34,7 +31,7 @@ shadeHorizon = sind(SForward.horzAng)>mu0;
 
 % image, shaded relief, shade by slope, shade by horizon
 % shaded relief
-figure('Name','Fig. 4')
+figure('Name','Fig. 4 Shaded by slope or horizon')
 ax = setAxes(R,true); %#ok<NASGU>
 X = zeros(size(Z));
 X(shadeSlope) = 1;
@@ -55,7 +52,4 @@ fprintf('fraction shaded by horizon and not by slope = %f\n',...
 
 et = toc;
 
-if printFigs
-    saveas(gcf,fullfile(resultFolder,[mfilename '_Fig4.png']))
-end
 end

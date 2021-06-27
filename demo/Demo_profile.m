@@ -1,4 +1,4 @@
-function et = Demo_profile(m,printFigs,resultFolder)
+function et = Demo_profile(m)
 %figure to demo the profile across the diagonal of the Himachal Pradesh DEM
 
 fprintf('This code %s reproduces Fig. 2\n',mfilename)
@@ -8,7 +8,7 @@ tic; % start the timer
 
 % plot profile
 dkm = m.d/1000;
-figure('Name','Fig. 2')
+figure('Name','Fig. 2 Elevation/Horizon profile')
 plot(dkm,z,'k','LineWidth',1)
 xlabel('distance (km)')
 ylabel('elevation (m)')
@@ -57,9 +57,5 @@ pbaspect([1.6 1 1])
 hold off;
 
 et = toc;
-
-if printFigs
-    saveas(gcf,fullfile(resultFolder,[mfilename '_Fig2.png']))
-end
 
 end

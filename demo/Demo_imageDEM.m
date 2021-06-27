@@ -1,4 +1,4 @@
-function et = Demo_imageDEM(Z,R,printFigs,resultFolder)
+function et = Demo_imageDEM(Z,R)
 %images of DEM similar to Fig. 1
 
 % intrinsic coordinates
@@ -8,24 +8,18 @@ function et = Demo_imageDEM(Z,R,printFigs,resultFolder)
 tic; % start the timer
 
 % image of the elevations
-figure('Name','Figure 1a')
+figure('Name','Fig. 1a Elevation')
 ax = setAxes(R,true); %#ok<NASGU>
 geoshow(double(Z),R,'DisplayType','surface');
 axis equal tight
 colormap(demcmap(double(Z)))
 colorbar('SouthOutside')
-if printFigs
-    saveas(gcf,fullfile(resultFolder,[mfilename '_Fig1a.png']))
-end
 
 % shaded relief
-figure('Name','Figure 1b')
+figure('Name','Fig. 1b Shaded Relief')
 ax = setAxes(R,true); %#ok<NASGU>
 surflsrm(lat,lon,double(Z),[45 315])
 axis equal tight
-if printFigs
-    saveas(gcf,fullfile(resultFolder,[mfilename '_Fig1b.png']))
-end
 
 et = toc;
 
