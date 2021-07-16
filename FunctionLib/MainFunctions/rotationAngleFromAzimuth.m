@@ -9,10 +9,10 @@ function [angToRotate,fwdAz,backAz] = rotationAngleFromAzimuth(desiredAzimuth,ra
 %   function azimuthPreference is set
 % rasterref - of the input grid, can be either Map or Geographic
 %Third input, name/value pair
-% if rasterref is a Map object
+% if rasterref is a Map object but ProjectedCRS field is empty
 %   'projection' - structure describing the projection to convert from map to
 %       geographic coordinates
-% if rasterref is a Geographic object
+% if rasterref is a Geographic object but GeographicCRS field is empty
 %   'planet' - default 'wgs84'
 %
 %Output
