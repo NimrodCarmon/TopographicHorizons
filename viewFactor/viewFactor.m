@@ -66,7 +66,7 @@ else
 end
 
 % convert output to matrix
-vf = reshape(vf,size(Z));
+vf = single(reshape(vf,size(Z)));
 
 end
 
@@ -75,9 +75,8 @@ function V = viewFpt(azm,horzAng,slopeDegrees,aspectDegrees )
 %
 %sky view factor for horizon circle for a point
 % (fraction of the sky open to that point in grid)
-%based on equation 7b in Dozier, J., and J. Frew (1990), Rapid calculation
-%   of terrain parameters for radiation modeling from digital elevation data,
-%   IEEE Trans. Geosci. Remote Sens., 28, 963-969, doi: 10.1109/36.58986.
+%based on equation X in Dozier, J. (2021), Revisiting the topographic horizon
+%problem in the era of big data and parallel computing.
 %
 %INPUT
 %   azm - azimuths of horizon vector in degrees
@@ -127,10 +126,18 @@ horzAng(horzAng<0) = 0;
 H = (pi/180)*(90-horzAng(:).');
 if slopeDegrees>0
     aspectRadian = (pi/180)*(aspectDegrees);
-    qIntegrand = cosd(slopeDegrees)*(1-cos(2*H))+...
-        cos(azmRadian-aspectRadian)*sind(slopeDegrees).*(2*H-sin(2*H));
+    % modify limits of integration for slopes facing away from horizons
+    t = cos(aspectRadian-azmRadian)<0;
+    holdH = H; %#ok<NASGU>
+    H(t) = min(H(t),...
+        acos(-cos(azmRadian(t)-aspectRadian)*sind(slopeDegrees)./...
+        sqrt(cosd(slopeDegrees)^2+sind(slopeDegrees)^2*cos(azmRadian(t)-aspectRadian).^2)));
+    qIntegrand = (cosd(slopeDegrees)*sin(H).^2 +...
+        sind(slopeDegrees)*cos(aspectRadian-azmRadian).*(H-cos(H).*sin(H)))/2;
 else
-    qIntegrand = 1-cos(2*H);
+    qIntegrand = sin(H).^2/2;
 end
-V = trapz(azmRadian,qIntegrand)/(4*pi);
+
+% integrate
+V = trapz(azmRadian,qIntegrand)/pi;
 end

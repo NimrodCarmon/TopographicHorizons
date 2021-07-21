@@ -72,8 +72,12 @@ if useLatLon
     end
 else
     % latitudes and longitudes of the input grid
-    [xIntrinsic,yIntrinsic] = meshgrid(1:R.RasterSize(2),1:R.RasterSize(1));
-    [xW,yW] = intrinsicToWorld(R,xIntrinsic,yIntrinsic);
+    if verLessThan('map','5.1')
+        [xIntrinsic,yIntrinsic] = meshgrid(1:R.RasterSize(2),1:R.RasterSize(1));
+        [xW,yW] = intrinsicToWorld(R,xIntrinsic,yIntrinsic);
+    else
+        [xW,yW] = worldGrid(R);
+    end
     % check if R contains a ProjectedCRS, which contains the projection and
     % the ellipsoid
     if any(contains(fieldnames(R),'ProjectedCRS')) && ~isempty(R.ProjectedCRS)
